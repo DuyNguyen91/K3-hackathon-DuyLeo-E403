@@ -1,0 +1,43 @@
+/* Reusable UI component styles */
+
+.page-nav {
+  justify-content: flex-start;
+}
+
+.upload-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.sample-box {
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(124, 77, 255, 0.08);
+}
+
+.result-card,
+.quiz-card,
+.note-card,
+.finish-card {
+  animation: fadeUp 0.4s ease both;
+}
+
+.source-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-item input {
+  width: auto;
+  min-height: auto;
+  margin: 0;
+}
+
+.option-item label {
+  flex: 1;
+}
