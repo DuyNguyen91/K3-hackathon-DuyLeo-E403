@@ -1,0 +1,353 @@
+<!DOCTYPE html><html class="light" lang="en" style="width: 1280px; height: 1301px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>DocuMind AI - Document View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#213145",
+                        "secondary": "#006a60",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#9acee1",
+                        "on-tertiary-container": "#b1b4b6",
+                        "background": "#f8f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#006f64",
+                        "on-primary-fixed-variant": "#114d5d",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-primary-container": "#87bbce",
+                        "on-surface-variant": "#40484b",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#434648",
+                        "primary": "#003441",
+                        "on-primary-fixed": "#001f28",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-surface": "#0b1c30",
+                        "primary-fixed": "#b6ebfe",
+                        "surface-container": "#e5eeff",
+                        "secondary-fixed-dim": "#5adac9",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-secondary-fixed-variant": "#005048",
+                        "secondary-fixed": "#7af7e5",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#306576",
+                        "surface-container-high": "#dce9ff",
+                        "outline": "#70787c",
+                        "on-background": "#0b1c30",
+                        "secondary-container": "#77f4e2",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "tertiary": "#2c3032",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#d3e4fe",
+                        "outline-variant": "#c0c8cb",
+                        "primary-fixed-dim": "#9acee1",
+                        "surface": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#00201c",
+                        "tertiary-fixed": "#e0e3e5",
+                        "primary-container": "#0f4c5c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "lg": "48px",
+                        "container-max": "1440px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "title-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for clean aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c0c8cb; /* outline-variant */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #70787c; /* outline */
+        }
+        
+        .highlight-text {
+            background-color: rgba(154, 206, 225, 0.4); /* inverse-primary with opacity */
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .tooltip-action {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0b1c30; /* on-surface for high contrast tooltip */
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(11, 28, 48, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 50;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            pointer-events: none;
+        }
+        
+        .tooltip-action::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px 5px 0;
+            border-style: solid;
+            border-color: #0b1c30 transparent transparent transparent;
+        }
+        
+        .highlight-text:hover .tooltip-action,
+        .highlight-text.active .tooltip-action {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flat no shadows sticky top-0 z-40 w-full">
+<div class="flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto">
+<!-- Brand & Search -->
+<div class="flex items-center gap-lg flex-1">
+<div class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed flex items-center gap-2">
+<span class="material-symbols-outlined fill text-secondary">smart_toy</span>
+                    DocuMind AI
+                </div>
+<!-- Search Bar (on_left configuration) -->
+<div class="relative w-full max-w-md hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-full py-2 pl-10 pr-4 font-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" placeholder="Search in document..." type="text">
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-md mx-md">
+<a class="text-on-surface-variant dark:text-on-tertiary-container hover:text-primary font-title-md text-title-md hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200 px-3 py-2 rounded-md" href="#">Workspace</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 font-title-md text-title-md hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200 px-3 py-2 opacity-80" href="#">Documents</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container hover:text-primary font-title-md text-title-md hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200 px-3 py-2 rounded-md" href="#">Library</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-sm">
+<button class="hidden md:flex items-center gap-2 bg-primary text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-full hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+                    Upload PDF
+                </button>
+<div class="flex items-center gap-2 border-l border-outline-variant pl-4 ml-2">
+<button aria-label="notifications" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="settings" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full ml-2 border border-outline-variant object-cover" data-alt="A professional headshot of a person wearing a smart casual outfit in a well-lit office environment. The lighting is soft and neutral, fitting for a modern corporate application. The background is slightly blurred." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx5mq3FW_x12yruwH_XOTrPoMpR0PiRcuPT43ySmd2N3S7g4tqT-LDsxEtHXA7Sq-q0BNNEAZ4H6CHCML7PJRuuKNzIke0aB3-wUpS3lGjuip_kcQfIUg6S2eM7-u0ovHURBy3ry4Zrjgk5bq3I7K3PVKvqMjCDoZb_f_sogXKcB_Huc6aOymJOrpjaBDT6u-NLzfXiit3lNa-0saCD0pMPw3Ro-0ZIc7VsIZOqauBJhx4NT4xArSWYg">
+</div>
+</div>
+</div>
+</header>
+<!-- Main Workspace (Fluid Split-Screen) -->
+<main class="flex-1 flex overflow-hidden w-full max-w-container-max mx-auto px-lg py-md gap-gutter relative">
+<!-- Left Pane: Document Viewer -->
+<section class="flex-1 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm flex flex-col overflow-hidden relative">
+<!-- Document Header -->
+<div class="border-b border-outline-variant p-4 flex justify-between items-center bg-surface-bright">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-error-container text-error rounded-md">
+<span class="material-symbols-outlined fill">picture_as_pdf</span>
+</div>
+<div>
+<h1 class="font-title-md text-title-md text-on-surface line-clamp-1">Q3_Financial_Report_Analysis_v2.pdf</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Page 4 of 28 • 120% Zoom</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-md transition-colors"><span class="material-symbols-outlined text-[20px]">remove</span></button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-md transition-colors"><span class="material-symbols-outlined text-[20px]">add</span></button>
+<div class="w-px h-6 bg-outline-variant mx-2"></div>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-md transition-colors"><span class="material-symbols-outlined text-[20px]">download</span></button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-md transition-colors"><span class="material-symbols-outlined text-[20px]">print</span></button>
+</div>
+</div>
+<!-- Document Content Area -->
+<div class="flex-1 overflow-y-auto p-8 bg-surface-container-low flex justify-center">
+<!-- PDF Page Mockup -->
+<div class="bg-white shadow-[0_4px_12px_rgba(15,76,92,0.05)] w-full max-w-3xl min-h-[800px] p-12 text-on-surface">
+<h2 class="font-headline-lg text-headline-lg mb-6 border-b border-outline-variant pb-2">3.2 Market Expansion Strategy</h2>
+<p class="font-body-lg text-body-lg mb-6 text-on-surface-variant leading-relaxed">
+                        Following the successful stabilization of core markets in Q1 and Q2, the strategic focus for the latter half of the fiscal year shifts towards aggressive geographic expansion. Initial feasibility studies indicate strong potential in the APAC region, particularly within emerging tech hubs.
+                    </p>
+<!-- Highlighted Paragraph -->
+<p class="font-body-lg text-body-lg mb-6 text-on-surface-variant leading-relaxed">
+<span class="highlight-text active group">
+<span class="tooltip-action group-hover:opacity-100">
+<span class="material-symbols-outlined text-[16px]">psychology</span>
+                                Giải thích đoạn này
+                            </span>
+                            However, the proposed entry into these secondary markets requires a recalibration of our logistics network. The current reliance on centralized distribution centers (CDCs) in North America creates unacceptable latency in supply chain operations for overseas territories. We estimate that shifting to a regional distribution hub (RDH) model will incur significant upfront capital expenditure (CapEx), projected at $45M over the next 18 months, but will ultimately reduce per-unit shipping costs by 22% and delivery times by 40% in the target regions.
+                        </span>
+</p>
+<p class="font-body-lg text-body-lg mb-6 text-on-surface-variant leading-relaxed">
+                        To mitigate the financial impact of this CapEx, the finance committee recommends exploring a phased rollout, prioritizing markets with the highest immediate demand density. Additionally, strategic partnerships with local third-party logistics (3PL) providers could serve as a temporary bridge, deferring full infrastructure investment until market penetration targets are met.
+                    </p>
+<!-- Faux Chart placeholder -->
+<div class="w-full h-48 bg-surface-container border border-outline-variant rounded-lg mb-6 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-50" data-alt="A clean, minimalist bar chart visualizing financial data. The chart uses a soft blue and teal color palette (aligned with the application's primary and secondary colors) against a pristine white background. The axes are thin and light gray, with clear, modern sans-serif typography for labels. The overall style is professional, flat, and corporate." style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuC4JgtAkBoKPYU0PO3EIHaHqnHZBePXbh-1OFURJQC6qw1tfrnVgQ671BYQUCTqFzu1Nt9B7jjGYpL004kxPtd1zilUNe0XQTrfWGVl1IPQwNQs87GvJIUfsfHSDXmGIrkijm2-hLFy0yGivnosiQXH7x2v7Zv7GRa5zF0Cj881-BlQhl9yKeqndAex9kxA4aRNFILdlkLY4dnTvfe-8WOOPKoor-30bj9ve9Ya-gEPeZ6HR_XLQeMSmA&quot;);"></div>
+<span class="relative z-10 font-label-sm text-label-sm text-on-surface-variant bg-white/80 px-2 py-1 rounded">Figure 3.2.1: Projected Logistics CapEx vs Operations Savings</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Divider -->
+<div class="w-px bg-outline-variant hidden lg:block"></div>
+<!-- Right Pane: AI Chat -->
+<aside class="w-full lg:w-[400px] xl:w-[480px] bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm flex flex-col overflow-hidden shrink-0">
+<!-- Chat Header -->
+<div class="border-b border-outline-variant p-4 flex justify-between items-center bg-surface-bright">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">forum</span>
+<h2 class="font-title-md text-title-md text-on-surface">DocuMind Assistant</h2>
+</div>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-md transition-colors"><span class="material-symbols-outlined text-[20px]">open_in_full</span></button>
+</div>
+<!-- Chat Messages Area -->
+<div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+<!-- System/Welcome Message -->
+<div class="flex gap-3 max-w-[90%]">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div class="bg-surface-container p-3 rounded-2xl rounded-tl-sm text-on-surface font-body-md text-body-md shadow-[0_4px_12px_rgba(15,76,92,0.05)]">
+                        I'm ready to analyze "Q3_Financial_Report_Analysis_v2.pdf". What would you like to know? You can highlight text in the document to ask specific questions.
+                    </div>
+</div>
+<!-- User Message (Triggered by Highlight) -->
+<div class="flex gap-3 max-w-[90%] self-end flex-row-reverse">
+<div class="w-8 h-8 rounded-full border border-outline-variant overflow-hidden shrink-0">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a person wearing a smart casual outfit in a well-lit office environment. The lighting is soft and neutral, fitting for a modern corporate application. The background is slightly blurred." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR5wUohsvZvb1YIUrg1yWQEfv2IiHH9sVRinPu3oBIjDSH0aJyHgMi0b7c75DyXC3Sa2xPnZmP9lRQeYNJ0htztkIPNsHxkST6xRpWGRL_SviyyjjHHp7fQsBAVxNOJjTS_wTzSsFC6rV881sMCHqDQj83x3P6lu7qoN1y1NADbsPwAS2MknyDs4jqE1WPOWZgrLy4D5KY_cRiemPB5PXCgELWoK9TPtXxsCfQZZdqucE__7Q69nLLag">
+</div>
+<div class="bg-primary text-on-primary p-3 rounded-2xl rounded-tr-sm font-body-md text-body-md shadow-[0_4px_12px_rgba(15,76,92,0.05)]">
+<div class="text-xs text-primary-fixed mb-1 flex items-center gap-1 border-l-2 border-secondary pl-2 bg-primary-fixed-variant/20 p-1 rounded-r">
+<span class="material-symbols-outlined text-[14px]">format_quote</span>
+                            "However, the proposed entry into these secondary markets requires a recalibration..."
+                        </div>
+                        Giải thích đoạn này.
+                    </div>
+</div>
+<!-- AI Response -->
+<div class="flex gap-3 max-w-[95%]">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div class="bg-tertiary-container text-on-tertiary-container p-4 rounded-2xl rounded-tl-sm font-body-md text-body-md shadow-[0_4px_12px_rgba(15,76,92,0.05)]">
+<p class="mb-3 text-white">Đoạn văn này giải thích <strong>thách thức về hậu cần (logistics)</strong> khi mở rộng sang các thị trường mới và <strong>giải pháp tài chính</strong> đi kèm:</p>
+<ul class="list-disc pl-5 space-y-2 mb-3 text-white">
+<li class=""><strong>Vấn đề hiện tại:</strong> Việc phụ thuộc vào các trung tâm phân phối tập trung (CDCs) ở Bắc Mỹ gây ra sự chậm trễ (latency) không thể chấp nhận được khi giao hàng ra nước ngoài.</li>
+<li class=""><strong>Giải pháp đề xuất:</strong> Chuyển sang mô hình trung tâm phân phối theo khu vực (RDH).</li>
+<li class=""><strong>Chi phí và Lợi ích:</strong>
+<ul class="list-circle pl-5 mt-1 text-gray-300">
+<li class="">Cần đầu tư vốn ban đầu (CapEx) rất lớn: 45 triệu USD trong 18 tháng tới.</li>
+<li class="">Đổi lại: Sẽ giảm 22% chi phí vận chuyển cho mỗi đơn vị sản phẩm và giảm 40% thời gian giao hàng tại các khu vực mới.</li>
+</ul>
+</li>
+</ul>
+<p class="text-white"><strong>Tóm lại:</strong> Công ty cần bỏ ra số tiền lớn ban đầu để xây dựng kho bãi tại địa phương nhằm giải quyết vấn đề giao hàng chậm, nhưng về lâu dài sẽ tiết kiệm chi phí và tăng tốc độ giao hàng đáng kể.</p>
+<!-- Interactive Chips -->
+<div class="mt-4 flex flex-wrap gap-2">
+<button class="bg-secondary/10 border border-secondary/20 text-on-surface hover:bg-secondary/20 px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">translate</span>
+                                Dịch sang tiếng Anh
+                            </button>
+<button class="bg-secondary/10 border border-secondary/20 text-on-surface hover:bg-secondary/20 px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">summarize</span>
+                                Tóm tắt ngắn hơn
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Input Area -->
+<div class="p-4 bg-surface-bright border-t border-outline-variant">
+<div class="relative flex items-end">
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl py-3 pl-4 pr-12 font-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all resize-none min-h-[48px] max-h-[120px]" placeholder="Ask a question about the document..." rows="1" style="scrollbar-width: none;"></textarea>
+<button class="absolute right-2 bottom-2 p-2 bg-primary text-on-primary rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+
+</div>
+</aside>
+</main>
+<script>
+        // Simple auto-resize for textarea
+        const textarea = document.querySelector('textarea');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+    </script>
+
+
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

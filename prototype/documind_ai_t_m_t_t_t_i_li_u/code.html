@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuMind AI - PDF Summary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#e5eeff",
+                      "secondary-fixed": "#7af7e5",
+                      "background": "#f8f9ff",
+                      "surface-dim": "#cbdbf5",
+                      "surface-bright": "#f8f9ff",
+                      "outline-variant": "#c0c8cb",
+                      "on-tertiary-container": "#b1b4b6",
+                      "surface-container-high": "#dce9ff",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#191c1e",
+                      "on-secondary-fixed": "#00201c",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#9acee1",
+                      "on-primary-fixed-variant": "#114d5d",
+                      "on-tertiary-fixed-variant": "#444749",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-background": "#0b1c30",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-surface": "#0b1c30",
+                      "on-primary-fixed": "#001f28",
+                      "inverse-primary": "#9acee1",
+                      "surface-container-low": "#eff4ff",
+                      "primary-container": "#0f4c5c",
+                      "tertiary-container": "#434648",
+                      "outline": "#70787c",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#005048",
+                      "secondary": "#006a60",
+                      "tertiary-fixed": "#e0e3e5",
+                      "on-secondary-container": "#006f64",
+                      "inverse-surface": "#213145",
+                      "tertiary-fixed-dim": "#c4c7c9",
+                      "tertiary": "#2c3032",
+                      "primary": "#003441",
+                      "surface-tint": "#306576",
+                      "on-primary-container": "#87bbce",
+                      "inverse-on-surface": "#eaf1ff",
+                      "on-surface-variant": "#40484b",
+                      "surface": "#f8f9ff",
+                      "secondary-container": "#77f4e2",
+                      "surface-variant": "#d3e4fe",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed": "#b6ebfe",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#5adac9",
+                      "error": "#ba1a1a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "sm": "12px",
+                      "gutter": "24px",
+                      "lg": "48px",
+                      "container-max": "1440px",
+                      "xl": "80px",
+                      "md": "24px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+                      "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Base styles from style guidance */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        /* Custom scrollbar for minimalism */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-variant');
+            border-radius: theme('borderRadius.full');
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline-variant');
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-body-lg text-body-lg overflow-hidden">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface text-primary font-title-md text-title-md border-b border-outline-variant flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto shrink-0 z-10 relative">
+<div class="flex items-center gap-md">
+<!-- Brand Logo -->
+<div class="font-headline-lg text-headline-lg font-bold text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1; font-size: 32px;">document_scanner</span>
+                DocuMind AI
+            </div>
+<!-- Search Bar on Left (Hidden on mobile) -->
+<div class="hidden md:flex items-center bg-surface-container-low rounded-full px-sm py-xs border border-outline-variant focus-within:border-secondary transition-colors w-64 ml-lg">
+<span class="material-symbols-outlined text-on-surface-variant mr-xs">search</span>
+<input class="bg-transparent border-none outline-none focus:ring-0 text-body-md text-on-surface w-full p-0 h-6" placeholder="Search in Workspace..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links (Center-ish) -->
+<nav class="hidden md:flex items-center gap-md absolute left-1/2 -translate-x-1/2">
+<a class="text-primary border-b-2 border-primary pb-1 font-title-md text-title-md hover:bg-surface-container-low transition-colors duration-200" href="#">Workspace</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 py-1 px-sm rounded-lg font-title-md text-title-md" href="#">Documents</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 py-1 px-sm rounded-lg font-title-md text-title-md" href="#">Library</a>
+</nav>
+<div class="flex items-center gap-sm">
+<!-- Trailing Actions -->
+<button class="bg-primary text-on-primary font-title-md text-title-md px-md py-xs rounded-lg hover:opacity-90 transition-opacity flex items-center gap-xs">
+<span class="material-symbols-outlined" style="font-size: 20px;">upload_file</span>
+                Upload PDF
+            </button>
+<div class="flex items-center gap-xs ml-sm text-on-surface-variant">
+<button class="p-xs rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-xs rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<!-- Profile -->
+<img alt="User profile avatar" class="w-8 h-8 rounded-full ml-sm object-cover border border-outline-variant" data-alt="A clean, minimalist 3D render of a professional user avatar icon, featuring a smooth, matte white humanoid figure against a soft, light blue (#eff4ff) background. Soft, diffused top-down lighting creating subtle shadows. The aesthetic is extremely polished, corporate, and modern, aligning with a professional AI tool interface. Rendered in high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMu2BW-uSBQ9JW_Th-zJxrpYdkzrtGoBtq2IIIb6ButzJZXsPz14n2vSEH5rF2C4DA0ggVm_vnwfN4ADdp7UXwtcoVa1pyvXKAI15_V5ws1VsmgIkDfaLsvMW07z8SqxRMbV-MrMkxXdPB-UPiQETBL21lyJzG4YTRSVzVlr92uXTFrCZNUmcrZUmUnwGZsZG10G11LGHv_MjgyAXJiXV-ZqUwz0pIrvBq0oO8dGPczL-zW32qlA3OHA"/>
+</div>
+</header>
+<!-- Main Workspace (Fluid Split-Screen) -->
+<main class="flex-1 flex w-full max-w-container-max mx-auto overflow-hidden relative">
+<!-- Left Pane: Document Viewer -->
+<section class="w-1/2 flex flex-col border-r border-outline-variant bg-surface-bright p-lg overflow-y-auto">
+<!-- Document Header -->
+<div class="flex items-center justify-between mb-md pb-sm border-b border-outline-variant">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Q3 Financial Report 2023.pdf</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">12 pages • Last modified 2 days ago</p>
+</div>
+<div class="flex gap-sm">
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">zoom_out</span>
+</button>
+<span class="flex items-center font-body-md text-body-md text-on-surface-variant px-xs">100%</span>
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">zoom_in</span>
+</button>
+</div>
+</div>
+<!-- PDF Page Wrapper (Elevation Level 2 - Floating) -->
+<div class="flex-1 bg-white rounded-lg shadow-[0_4px_12px_rgba(15,76,92,0.05)] border border-surface-variant overflow-hidden flex flex-col items-center p-xl relative group transition-transform duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(15,76,92,0.08)]">
+<!-- Mock PDF Content -->
+<div class="w-full max-w-[600px] flex flex-col gap-lg">
+<header class="text-center border-b-[3px] border-primary pb-md mb-md">
+<h2 class="font-display-lg text-display-lg text-primary tracking-tight">ACME Corp.</h2>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mt-sm">Q3 2023 Financial Results</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Prepared by: Finance &amp; Strategy Division | October 15, 2023</p>
+</header>
+<div class="space-y-md">
+<h4 class="font-title-md text-title-md text-on-background border-l-4 border-secondary pl-sm py-xs bg-surface-container-low">1. Executive Overview</h4>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed text-justify">
+                            The third quarter of 2023 presented a challenging yet ultimately rewarding macroeconomic environment for ACME Corp. Despite persistent inflationary pressures in the raw materials sector and a tightening labor market, strategic shifts in our supply chain management and the successful launch of the 'Nexus' product line have driven robust top-line growth. This report details the financial performance, operational highlights, and strategic outlook for the remainder of the fiscal year.
+                        </p>
+</div>
+<div class="space-y-md">
+<h4 class="font-title-md text-title-md text-on-background border-l-4 border-secondary pl-sm py-xs bg-surface-container-low">2. Key Financial Highlights</h4>
+<ul class="list-disc list-inside font-body-lg text-body-lg text-on-surface space-y-sm pl-sm">
+<li><strong class="font-semibold text-primary">Total Revenue:</strong> Reached $45.2 million, representing an 18% year-over-year (YoY) increase.</li>
+<li><strong class="font-semibold text-primary">Gross Margin:</strong> Improved to 42.5%, up 150 basis points from Q2 2023, driven by efficiency gains.</li>
+<li><strong class="font-semibold text-primary">Operating Income:</strong> Stood at $12.8 million, a 22% increase compared to the same period last year.</li>
+</ul>
+</div>
+<div class="mt-xl">
+<!-- Image placeholder in document -->
+<div class="w-full h-48 bg-cover bg-center rounded border border-outline-variant" data-alt="A clean, highly professional bar chart visualization set against a stark white background. The chart uses a corporate color palette of deep navy blue (#003441) and bright teal (#006a60) to represent financial quarters. The style is flat, modern, and minimalist, typical of high-end corporate financial reports. The lines are crisp, and the aesthetic conveys reliability and clear data representation without any clutter." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVA0VCPJ5aEh9aPsND39nx-LRSSmErRcDt5elytXj5utXqI1K8PCyvcXXLrwaEmaVGJn21JZ4d8L-XbUfBLRtOnXYjq_TRQyEuqSF2WpORWE1mlJ-u2d0RqR6THbhsAcj2DxvQ00OKXw1r1PjHZByIFsD8tiBbs9UjAAgv8kEE9dS-nFBE4IWwuAa4_kq0F604abGN1NpsXhMjOd1Ro0Qeu63ubdqA0taEKZWTeJfiAMELzPFfQ0hj0w')"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Pane: AI Chatbot -->
+<section class="w-1/2 flex flex-col bg-surface p-lg relative h-full">
+<!-- Chat Header -->
+<div class="flex items-center gap-sm mb-lg border-b border-outline-variant pb-sm shrink-0">
+<span class="material-symbols-outlined text-secondary text-[28px]">smart_toy</span>
+<h2 class="font-title-md text-title-md text-on-background">DocuMind Assistant</h2>
+</div>
+<!-- Chat History Area -->
+<div class="flex-1 overflow-y-auto pr-sm space-y-lg flex flex-col pb-xl">
+<!-- User Prompt Bubble -->
+<div class="self-end max-w-[85%] bg-surface-container border border-surface-variant text-on-surface p-md rounded-2xl rounded-tr-sm shadow-[0_4px_12px_rgba(15,76,92,0.03)]">
+<p class="font-body-lg text-body-lg">Please provide a detailed summary of this Q3 financial report.</p>
+</div>
+<!-- AI Response Bubble -->
+<div class="self-start w-full max-w-[95%] bg-[#434648]/5 border border-outline-variant text-on-surface p-lg rounded-2xl rounded-tl-sm shadow-[0_4px_12px_rgba(15,76,92,0.05)]">
+<div class="flex items-center gap-xs mb-md text-secondary">
+<span class="material-symbols-outlined" style="font-size: 20px;">auto_awesome</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">AI Summary Generated</span>
+</div>
+<!-- Structured Content inside AI Bubble -->
+<div class="space-y-md">
+<h3 class="font-title-md text-title-md text-primary font-bold">Comprehensive Summary: Q3 2023 Financial Report</h3>
+<p class="font-body-lg text-body-lg text-on-surface">
+                            The Q3 2023 report indicates strong overall performance for ACME Corp, overcoming macroeconomic hurdles like inflation and labor shortages through strategic supply chain adjustments and new product success.
+                        </p>
+<div class="mt-sm">
+<h4 class="font-body-lg text-body-lg font-semibold text-primary mb-xs">Key Takeaways</h4>
+<ul class="space-y-sm">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-[2px]" style="font-size: 18px;">check_circle</span>
+<span class="font-body-md text-body-md"><strong>Revenue Growth:</strong> Top-line revenue saw an 18% YoY increase, reaching $45.2M, largely fueled by the 'Nexus' product line.</span>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-[2px]" style="font-size: 18px;">check_circle</span>
+<span class="font-body-md text-body-md"><strong>Margin Expansion:</strong> Gross margin improved by 150 bps to 42.5%, indicating successful cost-efficiency measures despite raw material inflation.</span>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-[2px]" style="font-size: 18px;">check_circle</span>
+<span class="font-body-md text-body-md"><strong>Operating Profit:</strong> Operating income rose significantly by 22% YoY to $12.8M.</span>
+</li>
+</ul>
+</div>
+<div class="mt-sm bg-surface-container-low p-md rounded-lg border border-surface-variant">
+<h4 class="font-body-lg text-body-lg font-semibold text-primary mb-xs">Conclusion</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                ACME Corp is positioned strongly moving into Q4. The strategic shifts made in Q2/Q3 have successfully mitigated external risks, translating into solid financial gains. The focus should remain on maintaining supply chain resilience and supporting the momentum of new product launches.
+                            </p>
+</div>
+</div>
+<!-- Action Chips for response -->
+<div class="flex gap-sm mt-lg pt-sm border-t border-outline-variant/30">
+<button class="bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors px-sm py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">content_copy</span> Copy
+                         </button>
+<button class="bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors px-sm py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">ios_share</span> Export
+                         </button>
+</div>
+</div>
+<!-- Spacer for sticky input -->
+<div class="h-4"></div>
+</div>
+<!-- Chat Input Area (Sticky Bottom) -->
+<div class="absolute bottom-lg left-lg right-lg bg-surface pt-sm shrink-0">
+<!-- Mode Toggles (Chips) -->
+<div class="flex gap-sm mb-sm overflow-x-auto pb-xs scrollbar-hide">
+<button class="bg-secondary text-on-secondary px-md py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs shadow-sm transition-transform hover:scale-105">
+<span class="material-symbols-outlined text-[16px]">summarize</span>
+                        Tóm tắt
+                    </button>
+<button class="bg-surface-container text-on-surface-variant border border-outline-variant hover:bg-surface-container-high hover:text-on-surface transition-colors px-md py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">forum</span>
+                        Chat
+                    </button>
+<button class="bg-surface-container text-on-surface-variant border border-outline-variant hover:bg-surface-container-high hover:text-on-surface transition-colors px-md py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">translate</span>
+                        Translate
+                    </button>
+</div>
+<!-- Input Box -->
+<div class="relative bg-surface-bright rounded-xl border border-outline-variant focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-all shadow-sm">
+<textarea class="w-full bg-transparent border-none outline-none focus:ring-0 resize-none font-body-lg text-body-lg text-on-surface p-md pr-xl h-24 custom-scrollbar" placeholder="Ask DocuMind about this document..." rows="2"></textarea>
+<div class="absolute bottom-sm right-sm flex gap-xs">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container-low" title="Attach file">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<button class="bg-primary text-on-primary p-xs rounded-lg shadow-sm hover:opacity-90 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<div class="text-center mt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">DocuMind AI can make mistakes. Consider verifying important information.</span>
+</div>
+</div>
+</section>
+</main>
+<style>
+        /* Hide scrollbar for chips area */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant');
+            border-radius: 4px;
+        }
+    </style>
+</body></html>

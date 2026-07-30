@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocuMind AI - Tạo Quiz</title>
+<!-- Google Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#40484b",
+                    "on-background": "#0b1c30",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface": "#f8f9ff",
+                    "primary-fixed": "#b6ebfe",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary-container": "#006f64",
+                    "on-primary-container": "#87bbce",
+                    "on-primary-fixed": "#001f28",
+                    "outline-variant": "#c0c8cb",
+                    "surface-container-high": "#dce9ff",
+                    "primary-container": "#0f4c5c",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#9acee1",
+                    "surface-bright": "#f8f9ff",
+                    "on-surface": "#0b1c30",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-secondary-fixed-variant": "#005048",
+                    "secondary-fixed": "#7af7e5",
+                    "secondary-container": "#77f4e2",
+                    "tertiary-container": "#434648",
+                    "outline": "#70787c",
+                    "surface-dim": "#cbdbf5",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-fixed-dim": "#5adac9",
+                    "on-secondary-fixed": "#00201c",
+                    "tertiary-fixed": "#e0e3e5",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#9acee1",
+                    "tertiary": "#2c3032",
+                    "primary": "#003441",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "on-tertiary-container": "#b1b4b6",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f8f9ff",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#306576",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "inverse-surface": "#213145",
+                    "secondary": "#006a60",
+                    "on-primary-fixed-variant": "#114d5d",
+                    "surface-variant": "#d3e4fe",
+                    "surface-container": "#e5eeff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "xl": "80px",
+                    "md": "24px",
+                    "xs": "4px",
+                    "lg": "48px",
+                    "gutter": "24px",
+                    "sm": "12px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Scrollbar for sleek UI */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #c0c8cb; /* outline-variant */
+            border-radius: 9999px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #70787c; /* outline */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen flex flex-col overflow-hidden antialiased">
+<!-- Top Navigation Bar (from JSON) -->
+<header class="bg-surface border-b border-outline-variant docked full-width top-0 w-full z-10 flex-shrink-0 shadow-sm" style="height: 64px;">
+<div class="flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto h-full">
+<!-- Brand & Navigation -->
+<div class="flex items-center space-x-lg h-full">
+<a class="font-headline-lg text-headline-lg font-bold text-primary flex items-center space-x-2" href="#">
+<span class="material-symbols-outlined text-[32px] filled text-primary">description</span>
+<span>DocuMind AI</span>
+</a>
+<nav class="hidden md:flex h-full items-center space-x-sm">
+<a class="h-full flex items-center px-sm text-on-surface-variant hover:text-primary transition-colors duration-200 font-title-md text-title-md" href="#">
+                        Workspace
+                    </a>
+<!-- Active State on Documents (Contextually appropriate for viewing a document) -->
+<a class="h-full flex items-center px-sm text-primary border-b-2 border-primary font-title-md text-title-md pb-1 opacity-80 transition-opacity" href="#">
+                        Documents
+                    </a>
+<a class="h-full flex items-center px-sm text-on-surface-variant hover:text-primary transition-colors duration-200 font-title-md text-title-md" href="#">
+                        Library
+                    </a>
+</nav>
+</div>
+<!-- Actions -->
+<div class="flex items-center space-x-md">
+<button class="bg-primary hover:bg-primary/90 text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-lg transition-colors duration-200 hidden md:flex items-center space-x-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+<span>Upload PDF</span>
+</button>
+<div class="flex items-center space-x-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant shadow-sm cursor-pointer ml-2">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate user, smiling slightly, well-lit in a modern office environment, maintaining the calm and professional aesthetic of the UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYzXi8hMlRwPOu-Mj8UYLbLrfUtsbvpIVK8yPI49quKqGedyc7hSPX4Q2T_2DGkNezMDOyZh2VIRvhabdr_l89ITKOZKzBVECT1lr7yfv1G_k8neGXGO6s6ckr1V0BNDTCGLFnktVNUhwQfp_pY-FCAl7VQ2O08sYBM0cpTqcsbsm39MypYBtZWOHihf2pP9gHXV9J0ytX5fzsq7B3j2ubv2-pxCi6NmGWSnEmt_hpnK4QX2yto-GWQw"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 flex overflow-hidden max-w-container-max mx-auto w-full">
+<!-- Left Pane: Document Viewer -->
+<section class="flex-1 flex flex-col h-full bg-surface-container-lowest border-r border-outline-variant relative">
+<!-- Document Toolbar -->
+<div class="h-12 border-b border-outline-variant bg-surface flex items-center justify-between px-md shrink-0">
+<div class="flex items-center space-x-4">
+<span class="font-title-md text-title-md text-on-surface truncate max-w-[300px]">Báo cáo Tài chính Q3_2023.pdf</span>
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded text-xs font-medium border border-outline-variant">Trang 12 / 45</span>
+</div>
+<div class="flex items-center space-x-2">
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[20px]">zoom_out</span></button>
+<span class="text-sm font-medium w-12 text-center text-on-surface-variant">100%</span>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[20px]">zoom_in</span></button>
+<div class="w-px h-6 bg-outline-variant mx-2"></div>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[20px]">fit_screen</span></button>
+</div>
+</div>
+<!-- PDF Container -->
+<div class="flex-1 overflow-auto bg-surface-dim p-lg flex justify-center">
+<!-- Simulated PDF Page -->
+<div class="bg-surface-container-lowest w-[800px] h-[1131px] shadow-lg border border-outline-variant p-12 flex flex-col relative">
+<div class="text-center mb-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">BÁO CÁO TÀI CHÍNH QUÝ 3 NĂM 2023</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Tập đoàn Alpha Holdings</p>
+</div>
+<div class="space-y-6">
+<h3 class="font-title-md text-title-md text-on-surface border-b border-outline-variant pb-2">3. Phân tích Lưu chuyển Tiền tệ</h3>
+<p class="font-body-md text-body-md text-on-surface text-justify leading-relaxed">
+                            Trong quý 3 năm 2023, lưu chuyển tiền thuần từ hoạt động kinh doanh đạt mức 450 tỷ VNĐ, tăng 15% so với cùng kỳ năm trước. Sự gia tăng này chủ yếu nhờ vào việc tối ưu hóa quản lý hàng tồn kho và thu hồi công nợ hiệu quả hơn từ các đối tác chiến lược. Dòng tiền từ hoạt động đầu tư ghi nhận mức âm 210 tỷ VNĐ do công ty tiếp tục giải ngân cho dự án mở rộng nhà máy sản xuất tại khu vực phía Nam.
+                        </p>
+<div class="border border-outline-variant rounded-lg p-4 bg-surface-container-low">
+<table class="w-full text-left font-body-md text-body-md">
+<thead>
+<tr class="border-b border-outline-variant">
+<th class="py-2 text-on-surface-variant font-semibold">Chỉ tiêu (Tỷ VNĐ)</th>
+<th class="py-2 text-on-surface-variant font-semibold text-right">Q3/2023</th>
+<th class="py-2 text-on-surface-variant font-semibold text-right">Q3/2022</th>
+<th class="py-2 text-on-surface-variant font-semibold text-right">% Thay đổi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-outline-variant border-dashed">
+<td class="py-2 text-on-surface">Lưu chuyển tiền từ HĐKD</td>
+<td class="py-2 text-on-surface text-right">450</td>
+<td class="py-2 text-on-surface text-right">391</td>
+<td class="py-2 text-secondary text-right font-medium">+15.0%</td>
+</tr>
+<tr class="border-b border-outline-variant border-dashed">
+<td class="py-2 text-on-surface">Lưu chuyển tiền từ HĐĐT</td>
+<td class="py-2 text-on-surface text-right">(210)</td>
+<td class="py-2 text-on-surface text-right">(150)</td>
+<td class="py-2 text-error text-right font-medium">-40.0%</td>
+</tr>
+<tr>
+<td class="py-2 text-on-surface">Lưu chuyển tiền từ HĐTC</td>
+<td class="py-2 text-on-surface text-right">(50)</td>
+<td class="py-2 text-on-surface text-right">(80)</td>
+<td class="py-2 text-secondary text-right font-medium">+37.5%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="font-body-md text-body-md text-on-surface text-justify leading-relaxed">
+                            Hoạt động tài chính ghi nhận chi ra 50 tỷ VNĐ chủ yếu để trả lãi vay và cổ tức cho cổ đông. Tổng kết lại, lưu chuyển tiền thuần trong kỳ dương 190 tỷ VNĐ, nâng tổng tiền và tương đương tiền cuối kỳ lên mức 1.250 tỷ VNĐ, đảm bảo thanh khoản vững chắc cho các quý tiếp theo.
+                        </p>
+</div>
+<!-- Highlighted Section overlay to show AI is context-aware -->
+<div class="absolute top-[280px] left-8 right-8 h-[220px] bg-secondary/5 border-2 border-secondary/20 rounded pointer-events-none"></div>
+</div>
+</div>
+</section>
+<!-- Right Pane: AI Assistant -->
+<section class="w-[480px] flex flex-col h-full bg-surface-container-lowest shrink-0 shadow-[-4px_0_12px_rgba(15,76,92,0.02)] z-10 relative">
+<!-- Chat Header -->
+<div class="h-16 border-b border-outline-variant bg-surface-container-lowest flex items-center justify-between px-md shrink-0">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-[20px] filled">smart_toy</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface">DocuMind Assistant</h2>
+<p class="text-xs text-secondary flex items-center"><span class="w-1.5 h-1.5 bg-secondary rounded-full mr-1.5 inline-block"></span>Đang hoạt động</p>
+</div>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Quick Actions Bar -->
+<div class="px-md py-3 border-b border-outline-variant bg-surface-bright flex space-x-2 overflow-x-auto no-scrollbar shrink-0">
+<button class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors font-label-sm text-label-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[16px]">summarize</span>
+<span>Tóm tắt</span>
+</button>
+<button class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors font-label-sm text-label-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[16px]">translate</span>
+<span>Dịch thuật</span>
+</button>
+<!-- Active Quick Action -->
+<button class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary text-secondary font-label-sm text-label-sm whitespace-nowrap shadow-sm">
+<span class="material-symbols-outlined text-[16px]">quiz</span>
+<span>Tạo Quiz</span>
+</button>
+<button class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors font-label-sm text-label-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[16px]">find_in_page</span>
+<span>Trích xuất số liệu</span>
+</button>
+</div>
+<!-- Chat History Area -->
+<div class="flex-1 overflow-y-auto p-md space-y-6 bg-surface-container-lowest">
+<!-- User Message: Request Quiz -->
+<div class="flex justify-end">
+<div class="bg-surface-container text-on-surface px-4 py-3 rounded-2xl rounded-tr-sm max-w-[85%] font-body-md text-body-md shadow-sm border border-outline-variant/30">
+                        Hãy tạo một bài quiz ngắn khoảng 5 câu hỏi dựa trên phần phân tích lưu chuyển tiền tệ của quý 3 nhé.
+                    </div>
+</div>
+<!-- AI Message: The Quiz Interface -->
+<div class="flex items-start space-x-3">
+<div class="w-8 h-8 bg-primary-container rounded-full flex items-center justify-center text-on-primary-container shrink-0 mt-1">
+<span class="material-symbols-outlined text-[18px] filled">smart_toy</span>
+</div>
+<div class="flex-1">
+<!-- Intro text -->
+<div class="bg-tertiary/5 text-on-surface px-4 py-3 rounded-2xl rounded-tl-sm font-body-md text-body-md shadow-[0_4px_12px_rgba(15,76,92,0.05)] border border-outline-variant/30 mb-3">
+                            Đã hiểu! Dưới đây là bài quiz 5 câu hỏi dựa trên dữ liệu lưu chuyển tiền tệ Q3/2023 từ trang 12. Hãy chọn đáp án bạn cho là đúng nhất nhé.
+                        </div>
+<!-- Quiz Interactive Card (Bento-style) -->
+<div class="bg-surface-bright rounded-xl border border-outline-variant shadow-[0_4px_12px_rgba(15,76,92,0.05)] overflow-hidden">
+<!-- Quiz Header / Progress -->
+<div class="px-5 py-4 border-b border-outline-variant bg-surface flex justify-between items-center">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary">psychology</span>
+<h3 class="font-title-md text-title-md text-on-surface">Kiểm tra kiến thức</h3>
+</div>
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-2.5 py-1 rounded-full font-semibold">Câu 2 / 5</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1 bg-surface-variant">
+<div class="h-full bg-secondary w-2/5 rounded-r-full transition-all duration-500"></div>
+</div>
+<!-- Question Content -->
+<div class="p-5">
+<p class="font-title-md text-title-md text-on-surface mb-4">
+<span class="text-secondary mr-1">Q2.</span> Dòng tiền từ hoạt động đầu tư trong Q3/2023 mang giá trị âm chủ yếu do nguyên nhân nào dưới đây?
+                                </p>
+<!-- Options -->
+<form class="space-y-3">
+<!-- Option A -->
+<label class="flex items-start space-x-3 p-3 rounded-lg border border-outline-variant hover:bg-surface-container-low hover:border-outline cursor-pointer transition-colors duration-200">
+<input class="mt-1 h-4 w-4 text-primary focus:ring-primary border-outline-variant" name="quiz_q2" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface-variant">Chi trả cổ tức lớn cho các cổ đông chiến lược.</span>
+</label>
+<!-- Option B (Selected State Example) -->
+<label class="flex items-start space-x-3 p-3 rounded-lg border-2 border-secondary bg-secondary/5 cursor-pointer transition-colors duration-200">
+<input checked="" class="mt-1 h-4 w-4 text-secondary focus:ring-secondary border-secondary" name="quiz_q2" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface font-medium">Giải ngân cho dự án mở rộng nhà máy sản xuất tại khu vực phía Nam.</span>
+</label>
+<!-- Option C -->
+<label class="flex items-start space-x-3 p-3 rounded-lg border border-outline-variant hover:bg-surface-container-low hover:border-outline cursor-pointer transition-colors duration-200">
+<input class="mt-1 h-4 w-4 text-primary focus:ring-primary border-outline-variant" name="quiz_q2" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface-variant">Mua lại lượng lớn cổ phiếu quỹ trên thị trường.</span>
+</label>
+<!-- Option D -->
+<label class="flex items-start space-x-3 p-3 rounded-lg border border-outline-variant hover:bg-surface-container-low hover:border-outline cursor-pointer transition-colors duration-200">
+<input class="mt-1 h-4 w-4 text-primary focus:ring-primary border-outline-variant" name="quiz_q2" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface-variant">Thanh toán các khoản nợ vay dài hạn đến hạn.</span>
+</label>
+</form>
+<!-- Action -->
+<div class="mt-6 flex justify-end">
+<button class="bg-primary hover:bg-primary/90 text-on-primary font-label-sm text-label-sm px-6 py-2.5 rounded-lg transition-colors duration-200 flex items-center space-x-2 shadow-sm font-semibold">
+<span>Kiểm tra đáp án</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Context Link -->
+<div class="px-5 py-3 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+<span class="text-xs text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">info</span>
+                                    Trích xuất từ Trang 12
+                                </span>
+<button class="text-primary text-xs font-medium hover:underline flex items-center">
+                                    Xem tài liệu <span class="material-symbols-outlined text-[14px] ml-0.5">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer for scrolling -->
+<div class="h-4"></div>
+</div>
+<!-- Chat Input Area -->
+<div class="p-4 border-t border-outline-variant bg-surface-container-lowest shrink-0">
+<div class="relative flex items-end bg-surface border border-outline-variant rounded-xl focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-all shadow-sm">
+<button class="p-3 text-on-surface-variant hover:text-primary transition-colors flex-shrink-0">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<textarea class="w-full bg-transparent border-none focus:ring-0 resize-none py-3 px-1 text-on-surface font-body-md text-body-md max-h-32 placeholder-on-surface-variant/60" placeholder="Đặt câu hỏi về tài liệu này..." rows="1"></textarea>
+<div class="p-2 flex-shrink-0">
+<button class="w-10 h-10 bg-primary hover:bg-primary/90 text-on-primary rounded-lg flex items-center justify-center transition-colors shadow-sm disabled:opacity-50">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<div class="mt-2 text-center">
+<span class="text-[10px] text-on-surface-variant uppercase tracking-wider font-medium">AI có thể mắc lỗi. Vui lòng kiểm tra lại thông tin.</span>
+</div>
+</div>
+</section>
+</main>
+</body></html>

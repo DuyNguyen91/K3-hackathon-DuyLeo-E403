@@ -1,0 +1,214 @@
+<!DOCTYPE html><html class="h-full bg-surface dark:bg-inverse-surface" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>DocuMind AI - Upload</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#d3e4fe",
+                        "inverse-surface": "#213145",
+                        "on-primary-fixed": "#001f28",
+                        "surface-dim": "#cbdbf5",
+                        "on-primary-fixed-variant": "#114d5d",
+                        "on-surface-variant": "#40484b",
+                        "inverse-primary": "#9acee1",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "outline-variant": "#c0c8cb",
+                        "on-secondary-fixed": "#00201c",
+                        "primary-container": "#0f4c5c",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#b6ebfe",
+                        "secondary": "#006a60",
+                        "on-background": "#0b1c30",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "secondary-container": "#77f4e2",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "tertiary-container": "#434648",
+                        "outline": "#70787c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#87bbce",
+                        "on-secondary-fixed-variant": "#005048",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-fixed": "#e0e3e5",
+                        "secondary-fixed": "#7af7e5",
+                        "tertiary": "#2c3032",
+                        "on-surface": "#0b1c30",
+                        "on-secondary-container": "#006f64",
+                        "on-tertiary-container": "#b1b4b6",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-fixed-dim": "#5adac9",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary": "#003441",
+                        "surface-tint": "#306576",
+                        "primary-fixed-dim": "#9acee1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "48px",
+                        "xl": "80px",
+                        "base": "8px",
+                        "container-max": "1440px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "title-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-full flex flex-col font-body-lg text-body-lg text-on-surface bg-background">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto docked full-width top-0 z-50">
+<div class="flex items-center gap-md">
+<span class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">DocuMind AI</span>
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:border-secondary focus:ring-1 focus:ring-secondary outline-none w-64 text-on-surface" placeholder="Search..." type="text">
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-md">
+<a class="font-title-md text-title-md text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 Active: opacity-80 transition-opacity" href="#">Workspace</a>
+<a class="font-title-md text-title-md text-on-surface-variant dark:text-on-tertiary-container hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200 px-2 py-1 rounded" href="#">Documents</a>
+<a class="font-title-md text-title-md text-on-surface-variant dark:text-on-tertiary-container hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200 px-2 py-1 rounded" href="#">Library</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="hidden md:flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg hover:bg-on-primary-fixed-variant transition-colors duration-200 font-title-md text-title-md">
+<span class="material-symbols-outlined">upload</span> Upload PDF
+            </button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors duration-200"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors duration-200"><span class="material-symbols-outlined">settings</span></button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A small, professional headshot of a user avatar in a modern, light-mode corporate setting. The lighting is soft and flattering, highlighting a friendly expression. The background is a subtle, out-of-focus office environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFnDwJMzdr3JFq1PKs-ojJwd8RqRb6ViFd5dSMy7ZLSIZqaDfe6z2zFFRndDiL4PCxSR3jgP9xUAAavpvfY74X6afCUMXhFdFF39Ac81nC-QMwSBNJWx_GbMjGpghgAGmf70XzVZ0UnIB6RR0tv6Qx1ipymBsLaYKHqNzXWSjqIWfEhk8QyZgOer3gPvple6JHTspCYBzgAeu1JM5SOaafXwhG3oJaFyGaIpByFdz6Hir2w3PMnxNmTQ">
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden max-w-container-max mx-auto w-full">
+<!-- SideNavBar -->
+
+<!-- Main Workspace (Split View) -->
+<main class="flex-1 flex flex-col md:flex-row overflow-hidden bg-surface-container-lowest">
+<!-- Left Pane: PDF Viewer / Upload Area -->
+<section class="flex-1 border-r border-outline-variant p-lg flex items-center justify-center relative overflow-hidden bg-surface-container-lowest group">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-low/50 to-transparent pointer-events-none"></div>
+<div class="max-w-md w-full p-8 border-2 border-dashed border-outline-variant rounded-xl bg-surface-bright flex flex-col items-center justify-center text-center transition-all duration-300 group-hover:border-primary group-hover:bg-surface-container-low shadow-[0_4px_12px_rgba(15,76,92,0.05)]">
+<div class="w-20 h-20 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-6 shadow-sm">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">upload_file</span>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Chưa có tài liệu</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">Kéo thả file PDF vào đây hoặc nhấn nút bên dưới để bắt đầu phân tích.</p>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors duration-200 font-title-md text-title-md flex items-center gap-2 shadow-[0_4px_12px_rgba(15,76,92,0.05)] hover:shadow-[0_8px_16px_rgba(15,76,92,0.1)] hover:-translate-y-0.5">
+<span class="material-symbols-outlined">add</span> Tải lên PDF
+                    </button>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-4 opacity-70">Hỗ trợ PDF tối đa 50MB</p>
+</div>
+</section>
+<!-- Right Pane: AI Chatbot Interface -->
+<section class="w-full md:w-[450px] flex flex-col bg-surface-bright relative z-10 shadow-[-4px_0_24px_rgba(0,0,0,0.02)]">
+<!-- Chat Header -->
+<div class="p-sm md:p-md border-b border-outline-variant bg-surface flex justify-between items-center z-20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface leading-tight">DocuMind AI</h2>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary inline-block animate-pulse"></span> Sẵn sàng
+                            </span>
+</div>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Chat History (Empty State initially, showing welcome) -->
+<div class="flex-1 overflow-y-auto p-md space-y-6 bg-surface-bright">
+<!-- AI Welcome Message -->
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex-shrink-0 flex items-center justify-center text-on-secondary-container mt-1">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+</div>
+<div class="flex-1">
+<div class="bg-surface-container-low p-4 rounded-2xl rounded-tl-sm text-on-surface shadow-[0_4px_12px_rgba(15,76,92,0.05)] inline-block max-w-[90%]">
+<p class="font-body-md text-body-md">Xin chào! Tôi là trợ lý DocuMind AI. Hãy tải lên một tài liệu PDF để tôi có thể giúp bạn phân tích, tóm tắt hoặc giải đáp các câu hỏi nhé.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Input Area -->
+<div class="p-4 border-t border-outline-variant bg-surface-container-lowest z-20">
+<!-- Quick Actions -->
+<div class="flex flex-wrap gap-2 mb-4 opacity-50 pointer-events-none" title="Vui lòng tải lên tài liệu trước">
+<button class="px-3 py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container border border-secondary-container font-label-sm text-label-sm flex items-center gap-1 hover:bg-secondary-container/40 transition-colors">
+<span class="material-symbols-outlined text-sm">lightbulb</span> Giải thích
+                        </button>
+<button class="px-3 py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container border border-secondary-container font-label-sm text-label-sm flex items-center gap-1 hover:bg-secondary-container/40 transition-colors">
+<span class="material-symbols-outlined text-sm">short_text</span> Tóm tắt
+                        </button>
+<button class="px-3 py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container border border-secondary-container font-label-sm text-label-sm flex items-center gap-1 hover:bg-secondary-container/40 transition-colors">
+<span class="material-symbols-outlined text-sm">quiz</span> Tạo Quiz
+                        </button>
+<button class="px-3 py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container border border-secondary-container font-label-sm text-label-sm flex items-center gap-1 hover:bg-secondary-container/40 transition-colors">
+<span class="material-symbols-outlined text-sm">link</span> Liên quan
+                        </button>
+</div>
+<!-- Input Box -->
+<div class="relative flex items-end bg-surface border border-outline-variant rounded-xl focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-all shadow-[0_4px_12px_rgba(15,76,92,0.05)]">
+<textarea class="w-full bg-transparent border-none focus:ring-0 resize-none py-3 pl-4 pr-12 font-body-md text-body-md text-on-surface placeholder-on-surface-variant/70 disabled:opacity-50" disabled="" placeholder="Hỏi bất cứ điều gì về tài liệu này..." rows="1"></textarea>
+<button class="absolute right-2 bottom-2 p-2 rounded-lg bg-surface-container-highest text-on-surface-variant hover:bg-secondary hover:text-on-secondary transition-colors duration-200 disabled:opacity-50 disabled:hover:bg-surface-container-highest disabled:hover:text-on-surface-variant" disabled="">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<div class="text-center mt-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-60">AI có thể đưa ra thông tin không chính xác. Hãy kiểm tra lại.</span>
+</div>
+</div>
+</section>
+</main>
+</div>
+
+
+</body></html>
