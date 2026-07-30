@@ -50,90 +50,29 @@
             <div>
               <p class="eyebrow">AI assistant</p>
             </div>
+
           </div>
 
           <div class="chatbot-step active" id="stepUpload">
-            <div class="step-card">
-              <p class="eyebrow">Step 1</p>
-              <h4>Paste your learning material</h4>
-              <textarea id="lectureText" class="upload-area" placeholder="Paste your lecture here..."></textarea>
-              <div class="hero-actions">
-                <button class="btn btn-primary" id="continueToChat" type="button">Continue</button>
-                            <button class="btn btn-secondary btn-small" id="closeDrawer" type="button">Close</button>
-
-              </div>
+            <div class="chatbot-controls" role="toolbar" aria-label="Chat controls">
+              <button class="btn btn-tertiary" id="btnExplainTop" type="button">Giải thích</button>
+              <button class="btn btn-tertiary" id="btnSummaryTop" type="button">Tóm tắt</button>
+              <button class="btn btn-tertiary" id="btnCreateQuiz" type="button">Tạo quiz</button>
+              <button class="btn btn-tertiary" id="btnRevaluate" type="button">Liên quan</button>
             </div>
           </div>
 
-          <div class="chatbot-step" id="stepChat">
+          <div class="chatbot-step" id="stepQuiz">
             <div class="step-card">
-              <p class="eyebrow">Step 2</p>
-              <h4>Ask anything about the paragraph</h4>
-              <div class="chat-thread" id="singleChatThread">
-                <div class="message ai-message">
-                  <div class="avatar">V</div>
-                  <div class="message-bubble">
-                    <p>I’m ready to explain the highlighted paragraph in simple words.</p>
-                  </div>
+              <p class="eyebrow">Quiz</p>
+              <h4>Quiz nhanh</h4>
+              <div id="quizContainer">
+                <div id="quizQuestion"></div>
+                <div id="quizOptions"></div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" id="prevQuiz" type="button">Quay lại</button>
+                  <button class="btn btn-primary" id="nextQuiz" type="button">Tiếp</button>
                 </div>
-              </div>
-              <div class="chat-input-row">
-                <textarea id="questionInput" class="chat-input" placeholder="Ask anything..."></textarea>
-                <button class="btn btn-primary" id="sendQuestion" type="button">Send</button>
-              </div>
-              <div class="loading-state" id="loadingState" hidden>
-                <div class="dots"><span></span><span></span><span></span></div>
-                <p>Generating your explanation</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="chatbot-step" id="stepResult">
-            <div class="step-card">
-              <p class="eyebrow">Step 3</p>
-              <h4>AI explanation ready</h4>
-              <div class="tabs">
-                <button class="tab active" type="button" data-tab="explain">Explain</button>
-                <button class="tab" type="button" data-tab="summary">Summary</button>
-                <button class="tab" type="button" data-tab="sources">Sources</button>
-              </div>
-              <div class="tab-panel" id="panelExplain">
-                <p id="answerText"></p>
-              </div>
-              <div class="tab-panel" hidden id="panelSummary">
-                <ul id="summaryList"></ul>
-              </div>
-              <div class="tab-panel" hidden id="panelSources">
-                <div id="sourceList"></div>
-              </div>
-              <div class="hero-actions">
-                <button class="btn btn-primary" id="goToNote" type="button">Save Note</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="chatbot-step" id="stepNote">
-            <div class="step-card">
-              <p class="eyebrow">Step 4</p>
-              <h4>Save your note</h4>
-              <label class="field-label" for="noteTitle">Title</label>
-              <input id="noteTitle" class="input" value="Machine Learning" />
-              <label class="field-label" for="noteContent">Content</label>
-              <textarea id="noteContent" class="upload-area note-area"></textarea>
-              <div class="hero-actions">
-                <button class="btn btn-primary" id="saveNote" type="button">Save</button>
-                <button class="btn btn-secondary" id="finishFlow" type="button">Finish</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="chatbot-step" id="stepFinish">
-            <div class="step-card">
-              <p class="eyebrow">Complete</p>
-              <h4>Session completed</h4>
-              <p>Your explanation, summary, and note are ready.</p>
-              <div class="hero-actions">
-                <button class="btn btn-primary" id="restartFlow" type="button">Start over</button>
               </div>
             </div>
           </div>
