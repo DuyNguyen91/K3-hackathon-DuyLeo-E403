@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocuMind AI Prototype</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#003441',
+            secondary: '#006a60',
+            background: '#f8f9ff',
+            surface: '#ffffff',
+            'surface-soft': '#eff4ff',
+            'surface-strong': '#e5eeff',
+            'text-muted': '#5b6472',
+            'border-soft': '#dfe7f3'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .glass { backdrop-filter: blur(12px); }
+    .scrollbar-hidden::-webkit-scrollbar { display: none; }
+    .scrollbar-hidden { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-screen bg-background text-slate-800">
+  <div class="flex min-h-screen flex-col">
+    <header class="border-b border-border-soft bg-white/90 glass">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
+        <div class="flex items-center gap-3">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-white shadow-sm">
+            <span class="material-symbols-outlined">smart_toy</span>
+          </div>
+          <div>
+            <div class="text-lg font-semibold text-primary">DocuMind AI</div>
+            <div class="text-sm text-text-muted">Prototype cho tài liệu PDF & trợ lý học tập</div>
+          </div>
+        </div>
+        <div class="hidden items-center gap-2 md:flex">
+          <button class="rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700">Workspace</button>
+          <button class="rounded-full bg-primary px-3 py-2 text-sm font-medium text-white">Documents</button>
+          <button class="rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700">Library</button>
+        </div>
+        <button class="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm">Upload PDF</button>
+      </div>
+    </header>
+
+    <main class="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-6 px-4 py-6 md:px-8">
+      <section class="rounded-3xl border border-border-soft bg-white p-5 shadow-sm">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="mb-1 text-sm font-semibold uppercase tracking-[0.24em] text-secondary">Prototype demo</p>
+            <h1 class="text-2xl font-semibold text-slate-900">AI trợ lý đọc tài liệu bằng ngữ cảnh và phản hồi tức thời</h1>
+            <p class="mt-2 max-w-2xl text-sm text-text-muted">Người dùng có thể bôi đen đoạn văn, hỏi AI, nhận giải thích, tóm tắt, quiz và tài liệu liên quan trong cùng một màn hình.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button class="mode-btn rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700" data-mode="explain">Giải thích</button>
+            <button class="mode-btn rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700" data-mode="summarize">Tóm tắt</button>
+            <button class="mode-btn rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700" data-mode="quiz">Tạo quiz</button>
+            <button class="mode-btn rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700" data-mode="related">Liên quan</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid flex-1 gap-6 xl:grid-cols-[1.25fr_0.9fr]">
+        <div class="overflow-hidden rounded-3xl border border-border-soft bg-white shadow-sm">
+          <div class="flex items-center justify-between border-b border-border-soft bg-surface-soft px-4 py-3">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary">description</span>
+              <div>
+                <div class="font-semibold text-slate-900">Q3_Financial_Report_Analysis_v2.pdf</div>
+                <div class="text-sm text-text-muted">Trang 4 · Zoom 120%</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="rounded-lg border border-border-soft p-2 text-slate-600">-</button>
+              <span class="text-sm font-medium text-slate-600">120%</span>
+              <button class="rounded-lg border border-border-soft p-2 text-slate-600">+</button>
+            </div>
+          </div>
+
+          <div class="grid gap-6 p-4 lg:grid-cols-[1fr_280px] lg:p-6">
+            <div class="rounded-2xl border border-border-soft bg-slate-50 p-5 shadow-inner">
+              <div class="mb-4 border-b border-border-soft pb-3">
+                <h2 class="text-xl font-semibold text-slate-900">3.2 Market Expansion Strategy</h2>
+                <p class="mt-1 text-sm text-text-muted">Tài liệu PDF thật được nhúng trực tiếp vào vùng viewer.</p>
+              </div>
+
+              <div class="overflow-hidden rounded-xl border border-border-soft bg-white">
+                <iframe
+                  src="./1-AICB_Ngày_1.pdf"
+                  title="PDF viewer"
+                  class="h-[700px] w-full"
+                ></iframe>
+              </div>
+            </div>
+
+            <aside class="rounded-2xl border border-border-soft bg-surface-soft p-4">
+              <h3 class="mb-3 font-semibold text-slate-900">Tính năng nổi bật</h3>
+              <ul class="space-y-2 text-sm text-slate-700">
+                <li class="rounded-lg bg-white p-2">• Giải thích ngữ cảnh đoạn được highlight</li>
+                <li class="rounded-lg bg-white p-2">• Tóm tắt nhanh bằng câu ngắn gọn</li>
+                <li class="rounded-lg bg-white p-2">• Tạo quiz từ nội dung chính</li>
+                <li class="rounded-lg bg-white p-2">• Gợi tài liệu liên quan trong kho</li>
+              </ul>
+              <div class="mt-4 rounded-xl border border-secondary/20 bg-secondary/10 p-3 text-sm text-secondary">
+                <div class="font-semibold">Mục tiêu</div>
+                <div class="mt-1">Giảm thời gian đọc tài liệu và tăng độ hiểu của người dùng.</div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="flex min-h-[560px] flex-col overflow-hidden rounded-3xl border border-border-soft bg-white shadow-sm">
+          <div class="flex items-center justify-between border-b border-border-soft bg-surface-soft px-4 py-3">
+            <div class="flex items-center gap-2">
+              <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white">
+                <span class="material-symbols-outlined">forum</span>
+              </div>
+              <div>
+                <div class="font-semibold text-slate-900">DocuMind Assistant</div>
+                <div class="text-sm text-secondary">Đang sẵn sàng</div>
+              </div>
+            </div>
+            <button class="rounded-full p-2 text-slate-600 hover:bg-white">⋯</button>
+          </div>
+
+          <div id="chatWindow" class="scrollbar-hidden flex-1 space-y-3 overflow-y-auto bg-slate-50 p-4"></div>
+
+          <div class="border-t border-border-soft bg-white p-4">
+            <div class="mb-3 flex flex-wrap gap-2">
+              <button class="mode-btn rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700" data-mode="explain">Giải thích</button>
+              <button class="mode-btn rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700" data-mode="summarize">Tóm tắt</button>
+              <button class="mode-btn rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700" data-mode="quiz">Quiz</button>
+              <button class="mode-btn rounded-full border border-border-soft bg-surface-soft px-3 py-2 text-sm font-medium text-slate-700" data-mode="related">Liên quan</button>
+            </div>
+
+            <div class="flex items-end gap-2 rounded-2xl border border-border-soft bg-slate-50 p-2">
+              <textarea id="promptInput" rows="1" class="min-h-[44px] flex-1 resize-none border-0 bg-transparent px-2 py-2 text-sm outline-none" placeholder="Hỏi AI về tài liệu này..."></textarea>
+              <button id="sendBtn" class="rounded-xl bg-primary px-3 py-2 text-white">Gửi</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const chatWindow = document.getElementById('chatWindow');
+    const promptInput = document.getElementById('promptInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const highlightTarget = document.getElementById('highlightTarget');
+    const modes = {
+      explain: {
+        title: 'Giải thích đoạn này',
+        user: 'Giải thích đoạn này.',
+        answer: '<p><strong>Ý nghĩa:</strong> Đoạn văn đang nêu ra vấn đề hậu cần khi mở rộng sang thị trường mới.</p><ul class="mt-2 list-disc space-y-1 pl-5"><li>Hiện tại, hệ thống phân phối tập trung làm tăng độ trễ.</li><li>AI đề xuất chuyển sang mô hình phân phối theo khu vực.</li><li>Đi cùng là chi phí đầu tư ban đầu và lợi ích lâu dài.</li></ul>'
+      },
+      summarize: {
+        title: 'Tóm tắt ngắn',
+        user: 'Tóm tắt nội dung chính.',
+        answer: '<p><strong>Tóm tắt:</strong> Công ty cần đầu tư vào logistics khu vực để mở rộng sang thị trường mới, đồng thời cân bằng giữa chi phí ban đầu và lợi ích lâu dài.</p>'
+      },
+      quiz: {
+        title: 'Tạo quiz',
+        user: 'Tạo quiz ngắn cho tài liệu này.',
+        answer: '<div><p class="font-semibold">Quiz 3 câu hỏi</p><ol class="mt-2 list-decimal space-y-2 pl-5"><li>Vấn đề chính trong đoạn văn là gì?</li><li>Giải pháp được đề xuất là gì?</li><li>Ưu điểm lâu dài của giải pháp là gì?</li></ol></div>'
+      },
+      related: {
+        title: 'Tài liệu liên quan',
+        user: 'Gợi tài liệu liên quan.',
+        answer: '<div><p class="font-semibold">Tài liệu liên quan</p><ul class="mt-2 list-disc space-y-2 pl-5"><li>Báo cáo vận hành logistics quý 3</li><li>Danh sách đối tác 3PL tại khu vực Đông Nam Á</li><li>Đề xuất mở rộng theo từng thị trường mục tiêu</li></ul></div>'
+      }
+    };
+
+    let activeMode = 'explain';
+
+    function renderMessages() {
+      chatWindow.innerHTML = '';
+      const assistantCard = document.createElement('div');
+      assistantCard.className = 'rounded-2xl border border-border-soft bg-white p-4 shadow-sm';
+      assistantCard.innerHTML = `
+        <div class="mb-2 flex items-center gap-2 text-sm font-semibold text-primary">
+          <span class="material-symbols-outlined">auto_awesome</span>
+          ${modes[activeMode].title}
+        </div>
+        <div class="mb-3 rounded-xl bg-surface-soft p-3 text-sm text-slate-700">
+          <div class="font-semibold text-slate-900">Bạn hỏi:</div>
+          <div>${modes[activeMode].user}</div>
+        </div>
+        <div class="text-sm leading-7 text-slate-700">
+          ${modes[activeMode].answer}
+        </div>
+      `;
+      chatWindow.appendChild(assistantCard);
+    }
+
+    function setMode(mode) {
+      activeMode = mode;
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        const active = btn.dataset.mode === mode;
+        btn.classList.toggle('bg-primary', active);
+        btn.classList.toggle('text-white', active);
+        btn.classList.toggle('border-primary', active);
+      });
+      renderMessages();
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const text = promptInput.value.trim();
+      if (!text) return;
+      const userCard = document.createElement('div');
+      userCard.className = 'rounded-2xl bg-primary p-3 text-sm text-white';
+      userCard.innerHTML = `<div class="font-semibold">Bạn:</div><div>${text}</div>`;
+      chatWindow.appendChild(userCard);
+      promptInput.value = '';
+      setTimeout(() => renderMessages(), 250);
+    });
+
+    promptInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendBtn.click();
+      }
+    });
+
+    highlightTarget.addEventListener('click', () => setMode('explain'));
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => setMode(btn.dataset.mode));
+    });
+
+    setMode(activeMode);
+  </script>
+</body>
+</html>
