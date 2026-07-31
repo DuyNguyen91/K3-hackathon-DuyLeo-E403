@@ -1,3 +1,7 @@
+# Thành viên + phân công có tên
+
+**Nguyễn Văn Duy - 2A202601749
+
 # Mini Hackathon AI — Batch 03
 
 **SPEC → Prototype → Demo.** Đây không phải cuộc thi code — đây là cuộc thi **tư duy sản phẩm AI**.

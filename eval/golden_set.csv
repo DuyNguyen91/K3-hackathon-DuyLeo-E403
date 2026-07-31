@@ -1,0 +1,4 @@
+id,slide,question,expected_answer,expected_source
+1,slide12,"Machine Learning là gì?","Học từ dữ liệu","Slide 12"
+2,slide15,"Tóm tắt chương này","3 ý chính","Slide 15"
+3,slide18,"Giải thích overfitting","Định nghĩa overfitting","Slide 18"
