@@ -1,0 +1,6 @@
+{
+  "name": "DocuMind AI",
+  "description": "Smart Document Analysis, Summarization, Text Explanation, Quiz Generation and AI Assistant",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
